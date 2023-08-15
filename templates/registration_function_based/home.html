@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h2>Welcome to the Home Page</h2>
+    
+    {% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}!</p>
+    <p>Email: {{ user.email }}</p>
+    {% if profile %}
+        <p>Age: {{ profile.age }}</p>
+        <p>Gender: {{ profile.get_gender_display }}</p>
+    {% else %}
+        <p>Your profile details are not available.</p>
+    {% endif %}
+    
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <p>Please log in to see your details.</p>
+    {% endif %}
+</body>
+</html>
