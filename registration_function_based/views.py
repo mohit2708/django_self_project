@@ -64,6 +64,19 @@ def register(request):
         password2 = request.POST['password2']
         age = request.POST['age']
         gender = request.POST['gender']
+
+        value = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'username': username,
+            'email': email,
+            'age': age,
+            'gender': gender
+        }
+        error_messages = {}
+
+        if not first_name:
+            error_messages['first_name'] = "First name is required!"
         
         if password1 != password2:
             messages.error(request, "Passwords do not match.")
@@ -76,21 +89,25 @@ def register(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email is already registered.")
             return redirect('register')
-
+        
+        if not error_messages:
         # Create the user
-        user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password1)
+            user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password1)
 
-         # Create the user profile
-        UserProfile.objects.create(
-            user=user,
-            age=age,
-            gender=gender,
-        )
-        user.save()
+            # Create the user profile
+            UserProfile.objects.create(
+                user=user,
+                age=age,
+                gender=gender,
+            )
+            user.save()
+        else:
+            context = {'error':error_messages,'values':value}
+            return render(request, 'registration_function_based/register.html', context)
         
         messages.success(request, "Registration successful. You can now log in.")
         return redirect('login')  # Redirect to login page after successful registration
-    
+    # context = {'values':value}
     return render(request, 'registration_function_based/register.html')
 
 
