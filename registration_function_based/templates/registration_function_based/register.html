@@ -16,7 +16,7 @@
         {% csrf_token %}
         <!-- First Name Field -->
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name">
+        <input type="text" id="first_name" name="first_name" value="{{values.first_name}}">
         {% if error.first_name %}
             <p style="color: red;">{{ error.first_name }}</p>
         {% endif %}
@@ -24,7 +24,10 @@
         
         <!-- Last Name Field -->
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" required>
+        <input type="text" id="last_name" name="last_name" value="{{values.last_name}}">
+        {% if error.last_name %}
+            <p style="color: red;">{{ error.last_name }}</p>
+        {% endif %}
         <br>
         <!-- Username Field -->
         <label for="username">Username:</label>

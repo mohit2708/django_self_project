@@ -78,6 +78,9 @@ def register(request):
         if not first_name:
             error_messages['first_name'] = "First name is required!"
         
+        if not last_name:
+            error_messages['last_name'] = "Last name is required!"
+        
         if password1 != password2:
             messages.error(request, "Passwords do not match.")
             return redirect('register')
