@@ -49,8 +49,9 @@ def store(request):
 		return redirect('/')  # Redirect to a success page or any other URL after saving
 
 
-def show(request):
-	pass
+def show(request, id):
+	customer = Customer.objects.get(id=id)
+	return render(request, 'crud_function_based/edit.html', {'customers':customer})
 
 # def edit(request):
 # 	pass
@@ -60,3 +61,31 @@ def show(request):
 
 # def destroy(request):
 # 	pass
+
+
+# def update(request, id):
+#     first_name = request.POST['fname']
+#     last_name = request.POST['lname']
+#     email = request.POST['email']
+#     number = request.POST['number']
+#     country = request.POST['country']
+#     city = request.POST['city']
+#     message = request.POST['message']
+    
+#     update_data = Employee.objects.get(id=id)
+#     update_data.first_name = first_name
+#     update_data.last_name = last_name
+#     update_data.email = email
+#     update_data.phone_number = number
+#     update_data.country = country
+#     update_data.city = city
+#     update_data.message = message
+#     update_data.save()
+    
+#     return HttpResponseRedirect(reverse('employee_list'))
+
+# def destroy(request, id):
+#     del_data = Employee.objects.get(id=id)  
+#     del_data.delete()  
+#     # return redirect("/employee_list")
+#     return HttpResponseRedirect(reverse('employee_list'))
