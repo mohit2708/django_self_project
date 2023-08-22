@@ -56,36 +56,37 @@ def show(request, id):
 # def edit(request):
 # 	pass
 
-# def update(request):
-# 	pass
+def update(request, id):
+	first_name = request.POST.get('first_name', '').strip()
+	last_name = request.POST.get('last_name', '').strip()
+	email = request.POST.get('email', '').strip()
+	user_name = request.POST.get('user_name', '').strip()
+	phone_number = request.POST.get('phone_number', '').strip()
+	gender = request.POST.get('gender', '').strip()
+	dof = request.POST.get('dof', '').strip()
+	age = request.POST.get('age', '').strip()
+	country = request.POST.get('business', '').strip()
+	city = request.POST.get('city', '').strip()
+	message = request.POST.get('message', '').strip()
 
-# def destroy(request):
-# 	pass
+	customer_update = Customer.objects.get(id=id)
+	customer_update.first_name = first_name
+	customer_update.last_name = last_name
+	customer_update.email = email
+	customer_update.phone_number = phone_number
+	customer_update.gender = gender
+	customer_update.dof = dof
+	customer_update.age = age
+	customer_update.country = country
+	customer_update.city = city
+	customer_update.message = message
+	customer_update.save()
+
+	return redirect('/')
+	# return HttpResponseRedirect(reverse('index'))
 
 
-# def update(request, id):
-#     first_name = request.POST['fname']
-#     last_name = request.POST['lname']
-#     email = request.POST['email']
-#     number = request.POST['number']
-#     country = request.POST['country']
-#     city = request.POST['city']
-#     message = request.POST['message']
-    
-#     update_data = Employee.objects.get(id=id)
-#     update_data.first_name = first_name
-#     update_data.last_name = last_name
-#     update_data.email = email
-#     update_data.phone_number = number
-#     update_data.country = country
-#     update_data.city = city
-#     update_data.message = message
-#     update_data.save()
-    
-#     return HttpResponseRedirect(reverse('employee_list'))
-
-# def destroy(request, id):
-#     del_data = Employee.objects.get(id=id)  
-#     del_data.delete()  
-#     # return redirect("/employee_list")
-#     return HttpResponseRedirect(reverse('employee_list'))
+def destroy(request, id):
+    del_data = Customer.objects.get(id=id)  
+    del_data.delete()
+    return redirect('/')

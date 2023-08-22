@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>CRUD form</h2>
-  <form method="post" action="{% url 'store' %}">
+  <form method="post" action="{% url 'update' customers.id %}">
     {% csrf_token %}
   <div class="row">
   	<div class="col-sm-6">
