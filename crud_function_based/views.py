@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from crud_function_based.models import Customer
 
+
+# Get a logger instance
+
+
+
 # Create your views here.
 def list(request):
 	customer = Customer.objects.all()
@@ -17,14 +22,25 @@ def create(request):
 
 def store(request):
 	if request.method == 'POST':
+		print(request.POST)
+		if 'dof' in request.POST and not request.POST['dof']:
+			dof = None  # Set to None if empty
+		else:
+			dof = request.POST.get('dof', '').strip()
+
+		if 'age' in request.POST and not request.POST['age']:
+			age = None  # Set to None if empty
+		else:
+			age = request.POST.get('age', '').strip()
+
 		first_name = request.POST.get('first_name', '').strip()
 		last_name = request.POST.get('last_name', '').strip()
 		email = request.POST.get('email', '').strip()
 		user_name = request.POST.get('user_name', '').strip()
 		phone_number = request.POST.get('phone_number', '').strip()
 		gender = request.POST.get('gender', '').strip()
-		dof = request.POST.get('dof', '').strip()
-		age = request.POST.get('age', '').strip()
+		# dof = request.POST.get('dof', '').strip()
+		# age = request.POST.get('age', '').strip()
 		country = request.POST.get('business', '').strip()
 		city = request.POST.get('city', '').strip()
 		message = request.POST.get('message', '').strip()
