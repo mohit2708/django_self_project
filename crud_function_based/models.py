@@ -18,11 +18,12 @@ class Customer(models.Model):
         ('other', 'Other'),
     )
     gender = models.CharField(max_length=11,choices=GENDER_SELECT)
-    dof				= models.DateField(null=True, blank=True)
+    dof				= models.DateField(null=True)
     age 			= models.IntegerField(null=True)
     country         = models.CharField(max_length=50, null=True)
     city            = models.CharField(max_length=50, null=True)
     message         = models.TextField(default = 'Message...')
+    profile_image   = models.ImageField(upload_to='profileimg/', blank=True, null=True)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now=True)
 

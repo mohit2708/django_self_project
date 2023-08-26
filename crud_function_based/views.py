@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from crud_function_based.models import Customer
+from reportlab.pdfgen import canvas
 
-
-# Get a logger instance
-
-
+# remove the image from the folder
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 # Create your views here.
 def list(request):
@@ -44,6 +44,7 @@ def store(request):
 		country = request.POST.get('business', '').strip()
 		city = request.POST.get('city', '').strip()
 		message = request.POST.get('message', '').strip()
+		profile_image = request.FILES.get('pimage')
 
         # Create an instance of YourModel with cleaned data
 		save_data = Customer(
@@ -58,11 +59,12 @@ def store(request):
             country=country,
             city=city,
             message=message,
+            profile_image=profile_image,
         )
 
         # Save the data to the database
 		save_data.save()
-		return redirect('/')  # Redirect to a success page or any other URL after saving
+		return redirect('list')  # Redirect to a success page or any other URL after saving
 
 
 def show(request, id):
@@ -102,7 +104,28 @@ def update(request, id):
 	# return HttpResponseRedirect(reverse('index'))
 
 
+# def destroy(request, id):
+#     del_data = Customer.objects.get(id=id)  
+#     del_data.delete()
+#     return redirect('list')
+
 def destroy(request, id):
-    del_data = Customer.objects.get(id=id)  
+    del_data = Customer.objects.get(id=id)
+
+    # Delete the associated image file from the storage
+    if del_data.profile_image:  # Check if there's an image
+        storage = FileSystemStorage(location=settings.MEDIA_ROOT)
+        storage.delete(del_data.profile_image.name)
     del_data.delete()
-    return redirect('/')
+    return redirect('list')
+
+
+def getpdf(request):  
+    response = HttpResponse(content_type='application/pdf')  
+    response['Content-Disposition'] = 'attachment; filename="file.pdf"'  
+    p = canvas.Canvas(response)  
+    p.setFont("Times-Roman", 55)  
+    p.drawString(100,700, "Hello, Javatpoint.")  
+    p.showPage()  
+    p.save()  
+    return response

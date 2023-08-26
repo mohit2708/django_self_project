@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit/<int:id>', views.show, name="show"),
     path('update/<int:id>', views.update, name='update'),
     path('delete/<int:id>', views.destroy, name='delete'),
+    path('pdf/',views.getpdf, name="getpdf")
 ]

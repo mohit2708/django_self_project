@@ -15,12 +15,12 @@
   <form method="post" action="{% url 'update' customers.id %}">
     {% csrf_token %}
   <div class="row">
-  	<div class="col-sm-6">
+    <div class="col-sm-6">
       <div class="form-group">
         <label>First Name:</label>
         <input type="text" class="form-control" name="first_name" id="first_name" value="{{ customers.first_name }}" placeholder="Enter First Name" >
       </div>
-   	</div>
+    </div>
     <div class="col-sm-6">
       <div class="form-group">
         <label>Last Name:</label>
@@ -48,21 +48,21 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label>Age:</label>
-	       <input type="number" class="form-control" name="age" id="age" placeholder="Enter Age" >
+         <input type="number" class="form-control" name="age" id="age" placeholder="Enter Age" >
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
         <label>Gender:</label>
-	        <label class="radio-inline">
-	      <input type="radio" name="gender" value="male" checked>Male
-	    </label>
-	    <label class="radio-inline">
-	      <input type="radio" name="gender" value="female">Female
-	    </label>
-	    <label class="radio-inline">
-	      <input type="radio" name="gender" value="other">Other
-	    </label>
+          <label class="radio-inline">
+        <input type="radio" name="gender" value="male" checked>Male
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="gender" value="female">Female
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="gender" value="other">Other
+      </label>
       </div>
     </div>
     <div class="col-sm-6">
@@ -79,19 +79,19 @@
       </div>
     </div>
     <div class="col-sm-6">
-    	<label>Type of Business</label>
-		  <select class="form-control" name="business">
-		    <option>-- Select Business --</option>
-		    <option>small</option>
-		    <option>medium</option>
-		    <option>large</option>
-		  </select>
-	  </div>
+      <label>Type of Business</label>
+      <select class="form-control" name="business">
+        <option>-- Select Business --</option>
+        <option>small</option>
+        <option>medium</option>
+        <option>large</option>
+      </select>
+    </div>
     <div class="col-sm-6">
-    	<label>Dof</label>
-		  <input type="date" class="form-control" name="dof" id="dof">
-	  </div>
-	</div>
+      <label>Dof</label>
+      <input type="date" class="form-control" name="dof" id="dof">
+    </div>
+  </div>
    
     
     <button type="submit" class="btn btn-default">Submit</button>

@@ -290,8 +290,8 @@ $(document).ready(function(){
 						</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Address</th>
 						<th>Phone</th>
+						<th>Image</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -304,10 +304,22 @@ $(document).ready(function(){
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-						<td>{{ customer.first_name }} {{ customer.last_name }}</td>
-						<td>{{ customer.email }}</td>
-						<td>89 Chiaroscuro Rd, Portland, USA</td>
-						<td>(171) 555-2222</td>
+						<td>{% if customer.first_name or customer.last_name %}
+						        {{ customer.first_name }} {{ customer.last_name }}
+						    {% else %}
+						        N/A
+						    {% endif %}
+						</td>
+						<td>{{ customer.email|default:"N/A" }}</td>
+						<td>{{ customer.phone_number|default:"N/A" }}</td>						
+						<td>
+						    {% if customer.profile_image %}
+						        <img src="{{ customer.profile_image.url }}" alt="Profile Image" width="75" height="75">
+						    {% else %}
+						        No Image
+						    {% endif %}
+						</td>
+
 						<td>
 							<a
                         href="edit/{{ customer.id }}"
@@ -329,7 +341,7 @@ $(document).ready(function(){
                       ></a>
 					  
 							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							
 						</td>
 					</tr>
 					{% endfor %}
@@ -337,18 +349,7 @@ $(document).ready(function(){
 					
 				</tbody>
 			</table>
-			<div class="clearfix">
-				<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">4</a></li>
-					<li class="page-item"><a href="#" class="page-link">5</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>
+
 		</div>
 	</div>        
 </div>
@@ -422,27 +423,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">						
-					<h4 class="modal-title">Delete Employee</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">					
-					<p>Are you sure you want to delete these Records?</p>
-					<p class="text-warning"><small>This action cannot be undone.</small></p>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-danger" value="Delete">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+
 
 <div id="delete_confirm" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -484,16 +465,16 @@ $(document).ready(function(){
 	  $("#delete_confirm").modal();
 	}
   
-	$(function () {
-	  $("#example2").DataTable({
-		paging: true,
-		lengthChange: false,
-		searching: true,
-		ordering: true,
-		info: true,
-		autoWidth: false,
-		responsive: true,
-	  });
-	});
+	// $(function () {
+	//   $("#example2").DataTable({
+	// 	paging: true,
+	// 	lengthChange: false,
+	// 	searching: true,
+	// 	ordering: true,
+	// 	info: true,
+	// 	autoWidth: false,
+	// 	responsive: true,
+	//   });
+	// });
   </script>
 </html>

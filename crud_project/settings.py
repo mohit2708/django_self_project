@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import logging
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -122,3 +125,34 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# def get_log_file_path():
+#     today = datetime.today().strftime('%Y_%m_%d')
+#     log_file_name = f"{today}_file_name.log"
+#     return os.path.join('logs', log_file_name)  # 'logs' is the directory where log files will be stored
+
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',  # Set the desired log level (DEBUG, INFO, ERROR, etc.)
+#             'class': 'logging.FileHandler',
+#             'filename': get_log_file_path(),  # Use the generated log file name
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'root': {
+#         'handlers': ['file'],
+#         'level': 'DEBUG',  # Set the desired root log level
+#     },
+# }
+
+

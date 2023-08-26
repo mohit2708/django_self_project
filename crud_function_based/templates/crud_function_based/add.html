@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>CRUD form</h2>
-  <form method="post" action="{% url 'store' %}">
+  <form method="post" action="{% url 'store' %}" enctype="multipart/form-data">
     {% csrf_token %}
   <div class="row">
   	<div class="col-sm-6">
@@ -91,6 +91,10 @@
     	<label>Dof</label>
 		  <input type="date" class="form-control" name="dof" id="dof">
 	  </div>
+    <div class="col-sm-6">
+      <label>Image</label>
+      <input type="file" class="form-control" name="pimage" id="pimage">
+    </div>
 	</div>
    
     
